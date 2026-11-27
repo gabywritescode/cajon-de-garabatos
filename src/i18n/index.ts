@@ -72,7 +72,6 @@ export const UI = {
     subscribe: 'Suscribirme ↗',
     // About
     aboutTitle: 'Sobre mí',
-    aboutKicker: 'Sobre mí · Empieza aquí',
     aboutDescription: 'Quién está detrás de Cajón de garabatos y por dónde empezar.',
     photoAlt: 'Gabrielle, sonriendo, sentada en un banco de piedra delante de una pared azul cubierta de hiedra.',
     startHere: 'Empieza aquí',
@@ -123,7 +122,6 @@ export const UI = {
     interestSoon: 'The form is on its way. Meanwhile, subscribe to the newsletter: every workshop is announced there first.',
     subscribe: 'Subscribe ↗',
     aboutTitle: 'About',
-    aboutKicker: 'About · Start here',
     aboutDescription: 'Who’s behind Cajón de garabatos, and where to begin.',
     photoAlt: 'Gabrielle smiling, sitting on a stone bench in front of a blue wall covered in ivy.',
     startHere: 'Start here',

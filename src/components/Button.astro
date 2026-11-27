@@ -7,11 +7,11 @@ interface Props {
 
 const { href, variant = 'solid', class: className } = Astro.props;
 
-// "solid" is a blue block with an offset coral shadow, like a slightly
+// "solid" is a blue block with an offset green shadow, like a slightly
 // misregistered second ink pass; it settles into register on hover.
 const variants = {
   solid:
-    'bg-blue text-paper shadow-[3px_3px_0_var(--coral)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_var(--coral)]',
+    'bg-blue text-paper shadow-[3px_3px_0_var(--green)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_var(--green)]',
   ghost: 'border-2 border-blue text-blue hover:bg-blue hover:text-paper',
 };
 ---

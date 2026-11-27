@@ -17,8 +17,7 @@ const t = UI[lang];
 <BaseLayout title={SITE.name} page="home">
   <section class="relative mx-auto max-w-4xl px-4 pt-14 pb-20 sm:px-6 sm:pt-24">
     <Scribble name="lightbulb" class="text-blue absolute top-6 right-4 h-24 w-20 rotate-6 sm:top-16 sm:right-10 sm:h-36 sm:w-30" />
-    <p class="text-coral font-mono text-xs font-bold tracking-[0.2em] uppercase">{SITE.name}</p>
-    <h1 class="font-display riso-title mt-4 max-w-3xl pr-16 text-4xl leading-[1.12] font-black sm:pr-0 sm:text-6xl">
+    <h1 class="font-display riso-title max-w-3xl pr-16 text-4xl leading-[1.12] font-black sm:pr-0 sm:text-6xl">
       {t.heroLead}
       <span class="text-ink relative mt-3 inline-block px-[0.15em]">
         <Scribble name="circle" stretch class="text-coral absolute -inset-x-[0.55em] -inset-y-[0.45em]" />
@@ -30,7 +29,7 @@ const t = UI[lang];
       <Button href={SITE.newsletterUrl}>{t.readNewsletter}</Button>
       <Button href={pageHref('workshops', lang)} variant="ghost">{t.seeWorkshops}</Button>
     </div>
-    <Scribble name="squiggles" class="text-sky absolute right-6 -bottom-2 hidden h-20 w-36 sm:block" />
+    <Scribble name="squiggles" class="text-green absolute right-6 -bottom-2 hidden h-20 w-36 sm:block" />
   </section>
 
   <Noticeboard lang={lang} />

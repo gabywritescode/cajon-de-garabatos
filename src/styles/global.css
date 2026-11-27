@@ -6,9 +6,14 @@
    Primary: blue, black, white. Secondary: green, coral, grey.
    Tertiary (scribbles on blue/green/coral grounds): sky, pine, brick.
 
-   Contrast on --paper: --ink, --ink-soft, --blue, --green and --brick
-   pass WCAG AA for body text. --coral, --grey and --sky are for shapes,
-   large type and scribbles only.
+   Blue is the primary colour (headlines, buttons, links, labels).
+   Green and coral are the accents, used about equally: green for stars,
+   button shadows and the active nav underline; coral for the hand-drawn
+   circle, the headline offset and the notebook margin.
+
+   Contrast on --paper: --ink, --ink-soft, --blue, --pine and --brick
+   pass WCAG AA for small text. --green, --coral, --grey and --sky are
+   for shapes, large type and scribbles only (use --pine for green text).
    --------------------------------------------------------------------- */
 :root {
   color-scheme: light;
