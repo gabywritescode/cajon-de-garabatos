@@ -28,18 +28,51 @@ const starts = [
         {t.aboutHeading}
       </h1>
 
-      {/* TODO(Gaby): replace the lorem ipsum with your own words (es and en can differ). */}
       <div class="prose prose-lg mt-8 max-w-2xl">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat.
-        </p>
-        <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
-        </p>
+        {
+          lang === 'es' ? (
+            <>
+              <p>
+                Soy Gaby, la voz detrás del cajón. Soy de República Dominicana, viví cinco años en Nueva York y ahora
+                llevo casi una década viviendo en Madrid.
+              </p>
+              <p>
+                Tengo una doble licenciatura en escritura creativa y comunicación, un máster en filología hispánica y
+                soy parte de la promoción VI del programa de profesorado de la Escuela de Escritores.
+              </p>
+              <p>
+                Aunque publiqué mi primer artículo con ocho años y me he dedicado profesionalmente a la redacción en
+                start-ups y multinacionales, lo que más me apasiona es la literatura y la enseñanza. He sido tutora de
+                escritura, he organizado talleres propios y en mi tiempo libre escribo libros de fantasía y narrativa.
+              </p>
+              <p>
+                A pesar de todas las vueltas que ha dado mi vida, nunca he abandonado la escritura y quiero compartir
+                contigo todo lo que he aprendido en estos años.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                I’m Gaby, the voice behind the drawer. I’m from the Dominican Republic. I moved abroad when I turned
+                18, spending five years in New York, and have now been based in Madrid for almost a decade.
+              </p>
+              <p>
+                I double-majored in creative writing and communication, earned a master’s degree in Hispanic
+                literature, and I’m part of the sixth cohort of the teaching program at the Escuela de Escritores.
+              </p>
+              <p>
+                Although I published my first article at the age of eight and have worked professionally in content
+                roles at startups and multinationals, what I’m most passionate about is literature and teaching. I’ve
+                been a writing tutor, have organized my own workshops, and write fantasy and literary fiction books in
+                my spare time.
+              </p>
+              <p>
+                Despite all the twists and turns my life has taken, I’ve never abandoned writing, and I want to share
+                with you everything I’ve learned over these years.
+              </p>
+            </>
+          )
+        }
       </div>
     </div>
 
