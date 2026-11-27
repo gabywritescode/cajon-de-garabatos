@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
+import Scribble from '@/components/Scribble.astro';
+import { Image } from 'astro:assets';
+import photo from '@/assets/photos/gabrielle.png';
 import { SITE } from '@/site.config';
 import { UI, pageHref, type Lang } from '@/i18n';
 
@@ -19,28 +22,41 @@ const starts = [
 ---
 
 <BaseLayout title={t.aboutTitle} description={t.aboutDescription} page="about">
-  <section class="mx-auto max-w-4xl px-4 pt-16 pb-16 sm:px-6 sm:pt-24">
-    <p class="text-coral font-mono text-xs font-bold tracking-[0.2em] uppercase">{t.aboutKicker}</p>
-    <h1 class="font-display riso-title mt-4 text-5xl leading-none font-black tracking-tight sm:text-6xl">
-      {SITE.author}
-    </h1>
+  <section class="mx-auto grid max-w-4xl gap-12 px-4 pt-16 pb-20 sm:px-6 sm:pt-24 md:grid-cols-[1fr_19rem] md:gap-14">
+    <div>
+      <p class="text-coral font-mono text-xs font-bold tracking-[0.2em] uppercase">{t.aboutKicker}</p>
+      <h1 class="font-display riso-title mt-4 text-5xl leading-none font-black tracking-tight sm:text-6xl">
+        {SITE.author}
+      </h1>
 
-    {/* TODO(Gaby): replace the highlighted placeholders with your own words. */}
-    <div class="prose prose-lg mt-8 max-w-2xl">
-      {
-        lang === 'es' ? (
-          <>
-            <p class="todo">[Por escribir: quién eres y por qué empezaste Cajón de garabatos.]</p>
-            <p class="todo">[Por escribir: cómo trabajas en los talleres y a quién van dirigidos.]</p>
-          </>
-        ) : (
-          <>
-            <p class="todo">[To write: who you are and why you started Cajón de garabatos.]</p>
-            <p class="todo">[To write: how the workshops work and who they’re for.]</p>
-          </>
-        )
-      }
+      {/* TODO(Gaby): replace the lorem ipsum with your own words (es and en can differ). */}
+      <div class="prose prose-lg mt-8 max-w-2xl">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+          ea commodo consequat.
+        </p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.
+        </p>
+      </div>
     </div>
+
+    {/* Photo with its torn edge and tape, exported from Figma ("Picture of Me"). */}
+    <figure class="relative mx-auto w-full max-w-[19rem] rotate-2 md:mt-10">
+      <Image
+        src={photo}
+        alt={t.photoAlt}
+        widths={[320, 679]}
+        sizes="(min-width: 768px) 19rem, min(19rem, 100vw)"
+        format="webp"
+        loading="eager"
+        class="h-auto w-full drop-shadow-[0_10px_18px_rgb(0_0_0/0.18)]"
+      />
+      <Scribble name="squiggles" class="text-blue absolute -bottom-10 -left-6 h-14 w-28 -rotate-6" />
+    </figure>
   </section>
 
   <section aria-labelledby="start" class="mx-auto max-w-4xl px-4 sm:px-6">
