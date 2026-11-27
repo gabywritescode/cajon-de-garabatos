@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/Button.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { SITE } from '@/site.config';
+import { UI, formatDate, type Lang } from '@/i18n';
+import { upcomingWorkshops, workshopDate } from '@/data/workshops';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = UI[lang];
+const workshops = upcomingWorkshops();
+---
+
+<BaseLayout title={t.workshopsTitle} description={t.workshopsDescription} page="workshops">
+  <section class="mx-auto max-w-4xl px-4 pt-16 pb-12 sm:px-6 sm:pt-24">
+    <p class="text-ink-soft font-mono text-xs tracking-[0.2em] uppercase">{t.workshopsTitle}</p>
+    <h1 class="font-display riso-title mt-4 text-5xl leading-none font-extrabold tracking-tight sm:text-6xl">
+      {t.workshopsLead}
+    </h1>
+    <p class="mt-6 max-w-xl text-xl">{t.workshopsBody}</p>
+  </section>
+
+  {
+    workshops.length > 0 && (
+      <section aria-labelledby="upcoming" class="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
+        <SectionHeading title={t.upcoming} id="upcoming" />
+        <ul class="divide-ink/20 border-ink/20 divide-y border-y">
+          {workshops.map((w) => (
+            <li class="grid gap-2 py-6 sm:grid-cols-[10rem_1fr_auto] sm:items-baseline sm:gap-6">
+              <p class="text-ink-soft font-mono text-sm">
+                <time datetime={w.date}>{formatDate(workshopDate(w), lang)}</time>
+                {w.time && <span class="block">{w.time}</span>}
+              </p>
+              <div>
+                <h3 class="font-display text-2xl font-extrabold">{w.title[lang]}</h3>
+                <p class="mt-1">{w.summary[lang]}</p>
+                <p class="text-ink-soft mt-1 font-mono text-sm">{w.place[lang]}</p>
+              </div>
+              <p class="font-mono text-sm font-bold">
+                {w.lumaUrl ? (
+                  <a href={w.lumaUrl} class="text-blue underline">{t.signUp}</a>
+                ) : (
+                  <span class="marker">{t.signUpSoon}</span>
+                )}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section aria-labelledby="interest" class="mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="border-ink relative border-2 p-6 shadow-[6px_6px_0_var(--pink)] sm:p-10">
+      <h2 id="interest" class="font-display text-3xl font-extrabold">{t.interestTitle}</h2>
+      <p class="mt-3 max-w-xl">{t.interestBody}</p>
+      {
+        SITE.interestFormUrl ? (
+          <iframe
+            src={SITE.interestFormUrl}
+            title={t.interestTitle}
+            loading="lazy"
+            class="mt-6 h-[34rem] w-full border-0"
+          />
+        ) : (
+          <>
+            <p class="text-ink-soft mt-4 max-w-xl">{t.interestSoon}</p>
+            <div class="mt-6">
+              <Button href={SITE.subscribeUrl}>{t.subscribe}</Button>
+            </div>
+          </>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

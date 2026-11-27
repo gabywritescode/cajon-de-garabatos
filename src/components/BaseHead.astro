@@ -1,0 +1,58 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { Font } from 'astro:assets';
+import { SITE, IS_PREVIEW } from '@/site.config';
+import { UI, LANGS, pageUrl, type Lang, type PageKey } from '@/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  page?: PageKey;
+  lang: Lang;
+}
+
+const { title, description, page, lang } = Astro.props;
+const fullTitle = title === SITE.name ? title : `${title} · ${SITE.name}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="author" content={SITE.author} />
+<meta name="theme-color" content="#f3ede1" />
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{
+  page && (
+    <>
+      {LANGS.map((l) => (
+        <link rel="alternate" hreflang={l} href={pageUrl(page, l)} />
+      ))}
+      <link rel="alternate" hreflang="x-default" href={pageUrl(page, 'es')} />
+    </>
+  )
+}
+<link rel="sitemap" href={new URL('sitemap-index.xml', new URL(import.meta.env.BASE_URL, Astro.site))} />
+<link rel="alternate" type="application/rss+xml" title={SITE.name} href={SITE.feedUrl} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:locale" content={UI[lang].ogLocale} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:description" content={description} />
+<meta name="twitter:card" content="summary" />
+
+<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
+
+{/* The GitHub Pages preview stays out of search results until switch-over. */}
+<meta name="robots" content={IS_PREVIEW ? 'noindex, nofollow' : 'index, follow'} />
+
+<Font cssVariable="--ff-display" preload />
+<Font cssVariable="--ff-body" preload />
+<Font cssVariable="--ff-mono" />
+
+<ClientRouter />

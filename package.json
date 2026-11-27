@@ -1,0 +1,42 @@
+{
+  "name": "cajon-de-garabatos",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Cajón de garabatos, a bilingual (Spanish/English) literary newsletter and writing workshops.",
+  "keywords": [
+    "astro",
+    "newsletter",
+    "writing-workshops",
+    "i18n"
+  ],
+  "license": "MIT",
+  "author": "Gabrielle van Welie",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabywritescode/cajon-de-garabatos"
+  },
+  "homepage": "https://cajondegarabatos.com",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

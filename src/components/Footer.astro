@@ -1,0 +1,24 @@
+---
+import { SITE } from '@/site.config';
+import { UI, type Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = UI[Astro.props.lang];
+const year = new Date().getFullYear();
+---
+
+<footer class="border-ink/15 mt-24 border-t">
+  <div
+    class="text-ink-soft mx-auto flex max-w-4xl flex-col gap-4 px-4 py-8 font-mono text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6"
+  >
+    <p>© {year} {SITE.author} · {SITE.name}</p>
+    <nav class="flex flex-wrap items-center gap-4" aria-label="Newsletter">
+      <a href={SITE.newsletterUrl} class="hover:text-blue">Substack ↗</a>
+      <a href={SITE.feedUrl} class="hover:text-blue">RSS</a>
+      <a href="#top" class="hover:text-blue">{t.top}</a>
+    </nav>
+  </div>
+</footer>

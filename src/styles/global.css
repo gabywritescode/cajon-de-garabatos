@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* ---------------------------------------------------------------------
+   First pass at a risograph look: off-white paper with grain, two spot
+   inks (blue + fluorescent pink) that overprint with `multiply`, yellow
+   as an occasional highlighter. Every colour on the site comes from the
+   tokens below, so trying a new ink combination is a one-place change.
+
+   Contrast: --ink, --ink-soft and --blue all pass WCAG AA for body text
+   on --paper. --pink and --yellow are for shapes and highlights only,
+   never for text on paper.
+   --------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --paper: #f3ede1;
+  --ink: #1f1d2b;
+  --ink-soft: #4f4a5c;
+  --blue: #2c4fa3;
+  --pink: #ff4fa6;
+  --yellow: #ffd84d;
+  --surface: #ebe3d3;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-blue: var(--blue);
+  --color-pink: var(--pink);
+  --color-yellow: var(--yellow);
+  --color-surface: var(--surface);
+
+  --font-display: var(--ff-display);
+  --font-body: var(--ff-body);
+  --font-mono: var(--ff-mono);
+}
+
+@layer base {
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Paper grain over everything, multiplied like ink on stock. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .32 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background-color: var(--yellow);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px dashed var(--blue);
+    outline-offset: 3px;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+  /* Headline printed in blue with a pink pass slightly out of register. */
+  .riso-title {
+    color: var(--blue);
+    text-shadow: 0.045em 0.035em 0 color-mix(in srgb, var(--pink) 80%, transparent);
+  }
+
+  /* Pink halftone dots, for fills and corners. */
+  .halftone {
+    background-image: radial-gradient(circle, var(--pink) 1.3px, transparent 1.6px);
+    background-size: 7px 7px;
+  }
+
+  /* Highlighter swipe behind a phrase. */
+  .marker {
+    background: linear-gradient(transparent 55%, color-mix(in srgb, var(--yellow) 85%, transparent) 55% 92%, transparent 92%);
+    padding-inline: 0.1em;
+  }
+
+  /* Text Gaby still needs to write: obvious on the preview, easy to grep. */
+  .todo {
+    background: color-mix(in srgb, var(--pink) 22%, transparent);
+    outline: 1px dashed var(--pink);
+    padding-inline: 0.2em;
+  }
+}
+
+.prose {
+  --tw-prose-body: var(--ink);
+  --tw-prose-headings: var(--ink);
+  --tw-prose-links: var(--blue);
+  --tw-prose-bold: var(--ink);
+  --tw-prose-bullets: var(--pink);
+  --tw-prose-quotes: var(--ink);
+  --tw-prose-quote-borders: var(--pink);
+}
+.prose :where(h2, h3) {
+  font-family: var(--font-display);
+}

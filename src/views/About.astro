@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import { SITE } from '@/site.config';
+import { UI, pageHref, type Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = UI[lang];
+
+const starts = [
+  { title: t.startRead, body: t.startReadBody, href: SITE.newsletterUrl, n: '01' },
+  { title: t.startWorkshop, body: t.startWorkshopBody, href: pageHref('workshops', lang), n: '02' },
+  { title: t.startSubscribe, body: t.startSubscribeBody, href: SITE.subscribeUrl, n: '03' },
+];
+---
+
+<BaseLayout title={t.aboutTitle} description={t.aboutDescription} page="about">
+  <section class="mx-auto max-w-4xl px-4 pt-16 pb-16 sm:px-6 sm:pt-24">
+    <p class="text-ink-soft font-mono text-xs tracking-[0.2em] uppercase">{t.aboutKicker}</p>
+    <h1 class="font-display riso-title mt-4 text-5xl leading-none font-extrabold tracking-tight sm:text-6xl">
+      {SITE.author}
+    </h1>
+
+    {/* TODO(Gaby): replace the highlighted placeholders with your own words. */}
+    <div class="prose prose-lg mt-8 max-w-2xl">
+      {
+        lang === 'es' ? (
+          <>
+            <p class="todo">[Por escribir: quién eres y por qué empezaste Cajón de garabatos.]</p>
+            <p class="todo">[Por escribir: cómo trabajas en los talleres y a quién van dirigidos.]</p>
+          </>
+        ) : (
+          <>
+            <p class="todo">[To write: who you are and why you started Cajón de garabatos.]</p>
+            <p class="todo">[To write: how the workshops work and who they’re for.]</p>
+          </>
+        )
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="start" class="mx-auto max-w-4xl px-4 sm:px-6">
+    <SectionHeading title={t.startHere} id="start" />
+    <ol class="grid gap-6 sm:grid-cols-3">
+      {
+        starts.map((s) => (
+          <li>
+            <a href={s.href} class="group border-ink bg-paper block h-full border-2 p-5 transition-shadow hover:shadow-[5px_5px_0_var(--pink)] motion-reduce:transition-none">
+              <span class="riso-title font-display text-4xl font-extrabold" aria-hidden="true">{s.n}</span>
+              <h3 class="font-display mt-2 text-xl font-extrabold group-hover:underline">{s.title}</h3>
+              <p class="text-ink-soft mt-2 text-base">{s.body}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>

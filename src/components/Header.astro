@@ -1,0 +1,59 @@
+---
+import { SITE } from '@/site.config';
+import { UI, pageHref, otherLang, type Lang, type PageKey } from '@/i18n';
+
+interface Props {
+  page?: PageKey;
+  lang: Lang;
+}
+
+const { page, lang } = Astro.props;
+const t = UI[lang];
+const other = otherLang(lang);
+
+const links: { label: string; page: PageKey }[] = [
+  { label: t.nav.workshops, page: 'workshops' },
+  { label: t.nav.about, page: 'about' },
+];
+---
+
+<header class="border-ink/15 bg-paper/90 sticky top-0 z-40 border-b backdrop-blur">
+  <div class="mx-auto flex max-w-4xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <a href={pageHref('home', lang)} class="font-display text-ink text-lg leading-none font-extrabold tracking-tight sm:text-xl">
+      <span class="hidden sm:inline">{SITE.name}</span>
+      <span class="sm:hidden">Cajón</span>
+    </a>
+
+    <nav class="flex items-center gap-3 sm:gap-5" aria-label={lang === 'es' ? 'Principal' : 'Primary'}>
+      {
+        links.map((link) => (
+          <a
+            href={pageHref(link.page, lang)}
+            aria-current={page === link.page ? 'page' : undefined}
+            class:list={[
+              'font-mono text-[11px] tracking-wide whitespace-nowrap uppercase sm:text-xs',
+              page === link.page ? 'text-blue underline decoration-pink decoration-2 underline-offset-4' : 'text-ink-soft hover:text-ink',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={SITE.newsletterUrl}
+        class="text-ink-soft hover:text-ink font-mono text-[11px] tracking-wide whitespace-nowrap uppercase sm:text-xs"
+      >
+        {t.nav.newsletter}<span aria-hidden="true"> ↗</span>
+      </a>
+      <a
+        href={pageHref(page ?? 'home', other)}
+        hreflang={other}
+        lang={other}
+        title={t.switchTitle}
+        class="border-ink text-ink hover:bg-yellow rounded-sm border px-1.5 py-0.5 font-mono text-[11px] font-bold sm:text-xs"
+      >
+        {t.switchLabel}
+      </a>
+    </nav>
+  </div>
+</header>

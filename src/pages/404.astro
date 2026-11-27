@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { UI, pageHref } from '@/i18n';
+---
+
+<BaseLayout title="404">
+  <section class="mx-auto flex max-w-4xl flex-col items-start gap-4 px-4 py-32 sm:px-6">
+    <p class="riso-title font-display text-8xl font-extrabold">404</p>
+    <h1 class="font-display text-3xl font-extrabold">{UI.es.notFound}</h1>
+    <p class="text-ink-soft" lang="en">{UI.en.notFound}</p>
+    <div class="flex gap-6 font-mono text-sm font-bold">
+      <a href={pageHref('home', 'es')} class="text-blue underline">{UI.es.backHome}</a>
+      <a href={pageHref('home', 'en')} class="text-blue underline" lang="en">{UI.en.backHome}</a>
+    </div>
+  </section>
+</BaseLayout>

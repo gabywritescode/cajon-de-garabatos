@@ -1,0 +1,32 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import BaseHead from '@/components/BaseHead.astro';
+import { UI, toLang, type PageKey } from '@/i18n';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Which page this is, for the language switcher and hreflang links. Omit on the 404. */
+  page?: PageKey;
+}
+
+const lang = toLang(Astro.currentLocale);
+const t = UI[lang];
+const { title, description = t.description, page } = Astro.props;
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <BaseHead title={title} description={description} page={page} lang={lang} />
+  </head>
+  <body id="top">
+    <Header page={page} lang={lang} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

@@ -1,0 +1,84 @@
+---
+// "What's on now": the next workshop and the latest issue, pinned like
+// printed notes. Both fill themselves in at build time.
+import { SITE } from '@/site.config';
+import { UI, pageHref, formatDate, type Lang } from '@/i18n';
+import { upcomingWorkshops, workshopDate } from '@/data/workshops';
+import { latestIssue } from '@/lib/substack';
+import SectionHeading from '@/components/SectionHeading.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = UI[lang];
+const workshop = upcomingWorkshops()[0];
+const issue = await latestIssue(lang);
+
+const card = 'relative bg-paper border-2 border-ink p-6 pt-8 shadow-[5px_5px_0_var(--blue)]';
+const tape = 'absolute -top-3 left-1/2 h-6 w-24 -translate-x-1/2 bg-yellow/80 mix-blend-multiply';
+const label = 'font-mono text-xs font-bold tracking-[0.18em] uppercase text-ink-soft';
+---
+
+<section aria-labelledby="board" class="mx-auto max-w-4xl px-4 sm:px-6">
+  <SectionHeading title={t.boardTitle} id="board" />
+  <div class="grid gap-10 sm:grid-cols-2 sm:gap-8">
+    <article class:list={[card, 'sm:-rotate-1']}>
+      <span class={tape} aria-hidden="true"></span>
+      <span class="halftone absolute top-0 right-0 h-16 w-16 opacity-70 [mask-image:linear-gradient(225deg,black,transparent_70%)]" aria-hidden="true"></span>
+      <h3 class={label}>{t.nextWorkshop}</h3>
+      {
+        workshop ? (
+          <>
+            <p class="font-display mt-3 text-2xl leading-tight font-extrabold">{workshop.title[lang]}</p>
+            <p class="text-ink-soft mt-2 font-mono text-sm">
+              <time datetime={workshop.date}>{formatDate(workshopDate(workshop), lang)}</time>
+              {workshop.time && ` · ${workshop.time}`} · {workshop.place[lang]}
+            </p>
+            <p class="mt-3">{workshop.summary[lang]}</p>
+            <p class="mt-4 font-mono text-sm font-bold">
+              {workshop.lumaUrl ? (
+                <a href={workshop.lumaUrl} class="text-blue underline">{t.signUp}</a>
+              ) : (
+                <span class="marker">{t.signUpSoon}</span>
+              )}
+            </p>
+          </>
+        ) : (
+          <>
+            <p class="mt-3">{t.noWorkshop}</p>
+            <p class="mt-4 font-mono text-sm font-bold">
+              <a href={`${pageHref('workshops', lang)}#interest`} class="text-blue underline">{t.noWorkshopCta}</a>
+            </p>
+          </>
+        )
+      }
+    </article>
+
+    <article class:list={[card, 'sm:mt-6 sm:rotate-1']}>
+      <span class={tape} aria-hidden="true"></span>
+      <h3 class={label}>{t.latestIssue}</h3>
+      {
+        issue ? (
+          <>
+            <p class="font-display mt-3 text-2xl leading-tight font-extrabold">
+              <a href={issue.url} class="hover:text-blue" lang={issue.lang}>{issue.title}</a>
+            </p>
+            <p class="text-ink-soft mt-2 font-mono text-sm">
+              <time datetime={issue.date.toISOString()}>{formatDate(issue.date, lang)}</time>
+            </p>
+            {issue.summary && <p class="mt-3" lang={issue.lang}>{issue.summary}</p>}
+            <p class="mt-4 font-mono text-sm font-bold">
+              <a href={issue.url} class="text-blue underline">{t.readIssue}</a>
+            </p>
+          </>
+        ) : (
+          <p class="mt-3">
+            <a href={SITE.newsletterUrl} class="text-blue underline">{t.noIssue}</a>
+          </p>
+        )
+      }
+    </article>
+  </div>
+</section>
