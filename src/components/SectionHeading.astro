@@ -1,4 +1,6 @@
 ---
+import Scribble from '@/components/Scribble.astro';
+
 interface Props {
   title: string;
   id?: string;
@@ -7,7 +9,7 @@ interface Props {
 const { title, id } = Astro.props;
 ---
 
-<h2 id={id} class="font-display text-ink mb-6 flex items-center gap-3 text-sm font-extrabold tracking-[0.18em] uppercase">
-  <span class="bg-pink inline-block h-3 w-3 rounded-full mix-blend-multiply" aria-hidden="true"></span>
+<h2 id={id} class="font-mono text-ink mb-8 flex items-center gap-2 text-sm font-bold tracking-[0.18em] uppercase">
+  <Scribble name="star" class="text-coral h-6 w-5 -rotate-6" />
   {title}
 </h2>

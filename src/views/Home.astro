@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/Button.astro';
 import Noticeboard from '@/components/Noticeboard.astro';
+import Scribble from '@/components/Scribble.astro';
 import { SITE } from '@/site.config';
 import { UI, pageHref, type Lang } from '@/i18n';
 
@@ -14,20 +15,22 @@ const t = UI[lang];
 ---
 
 <BaseLayout title={SITE.name} page="home">
-  <section class="relative mx-auto max-w-4xl overflow-hidden px-4 pt-16 pb-20 sm:px-6 sm:pt-24">
-    <span
-      class="halftone pointer-events-none absolute -top-10 -right-24 h-72 w-72 rounded-full opacity-60 mix-blend-multiply"
-      aria-hidden="true"></span>
-    <p class="text-ink-soft relative font-mono text-xs tracking-[0.2em] uppercase">{SITE.name}</p>
-    <h1 class="font-display riso-title relative mt-4 max-w-3xl text-5xl leading-[0.95] font-extrabold tracking-tight sm:text-7xl">
+  <section class="relative mx-auto max-w-4xl px-4 pt-14 pb-20 sm:px-6 sm:pt-24">
+    <Scribble name="lightbulb" class="text-blue absolute top-6 right-4 h-24 w-20 rotate-6 sm:top-16 sm:right-10 sm:h-36 sm:w-30" />
+    <p class="text-coral font-mono text-xs font-bold tracking-[0.2em] uppercase">{SITE.name}</p>
+    <h1 class="font-display riso-title mt-4 max-w-3xl pr-16 text-4xl leading-[1.12] font-black sm:pr-0 sm:text-6xl">
       {t.heroLead}
-      <span class="text-ink block">{t.heroEm}</span>
+      <span class="text-ink relative mt-3 inline-block px-[0.15em]">
+        <Scribble name="circle" stretch class="text-coral absolute -inset-x-[0.55em] -inset-y-[0.45em]" />
+        <span class="relative">{t.heroEm}</span>
+      </span>
     </h1>
-    <p class="relative mt-8 max-w-xl text-xl">{t.heroBody}</p>
-    <div class="relative mt-10 flex flex-wrap gap-4">
+    <p class="mt-10 max-w-xl text-lg">{t.heroBody}</p>
+    <div class="mt-10 flex flex-wrap gap-4">
       <Button href={SITE.newsletterUrl}>{t.readNewsletter}</Button>
       <Button href={pageHref('workshops', lang)} variant="ghost">{t.seeWorkshops}</Button>
     </div>
+    <Scribble name="squiggles" class="text-sky absolute right-6 -bottom-2 hidden h-20 w-36 sm:block" />
   </section>
 
   <Noticeboard lang={lang} />

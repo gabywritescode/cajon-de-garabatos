@@ -24,8 +24,14 @@ All the interface copy for both languages is in `src/i18n/index.ts`. Slugs are i
 | Workshops (the next one goes on the noticeboard automatically) | `src/data/workshops.ts` |
 | Class-interest form (Tally / Google Forms embed URL) | `interestFormUrl` in `src/site.config.ts` |
 | Sobre mí text (highlighted placeholders) | `src/views/About.astro` |
-| Colours (the riso inks) | top of `src/styles/global.css` |
-| Fonts | `fonts` in `astro.config.mjs` |
+| Colours (brand palette) | top of `src/styles/global.css` |
+| Fonts (Merriweather + Merriweather Sans) | `fonts` in `astro.config.mjs` |
+| Logo, tape | `public/brand/` |
+| Scribbles (recolourable) | `src/assets/scribbles/`, used via `<Scribble name="…" />` |
+
+## Brand
+
+Colours, fonts, the logo, the scribbles and the tape come from the Figma file "IG - Cajón de Garabatos", page MAIN VAINAS. To add another scribble, export it from Figma as SVG, replace its fill colour with `currentColor`, save it in `src/assets/scribbles/`, and add its name to `ScribbleName` in `src/components/Scribble.astro`.
 
 The "latest issue" card reads `cajondegarabatos.substack.com/feed` at build time and works out each issue's language from its words. If the feed can't be reached, the card falls back to a link to Substack.
 

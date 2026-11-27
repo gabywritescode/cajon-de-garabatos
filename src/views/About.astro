@@ -20,8 +20,8 @@ const starts = [
 
 <BaseLayout title={t.aboutTitle} description={t.aboutDescription} page="about">
   <section class="mx-auto max-w-4xl px-4 pt-16 pb-16 sm:px-6 sm:pt-24">
-    <p class="text-ink-soft font-mono text-xs tracking-[0.2em] uppercase">{t.aboutKicker}</p>
-    <h1 class="font-display riso-title mt-4 text-5xl leading-none font-extrabold tracking-tight sm:text-6xl">
+    <p class="text-coral font-mono text-xs font-bold tracking-[0.2em] uppercase">{t.aboutKicker}</p>
+    <h1 class="font-display riso-title mt-4 text-5xl leading-none font-black tracking-tight sm:text-6xl">
       {SITE.author}
     </h1>
 
@@ -49,9 +49,9 @@ const starts = [
       {
         starts.map((s) => (
           <li>
-            <a href={s.href} class="group border-ink bg-paper block h-full border-2 p-5 transition-shadow hover:shadow-[5px_5px_0_var(--pink)] motion-reduce:transition-none">
-              <span class="riso-title font-display text-4xl font-extrabold" aria-hidden="true">{s.n}</span>
-              <h3 class="font-display mt-2 text-xl font-extrabold group-hover:underline">{s.title}</h3>
+            <a href={s.href} class="group border-blue bg-paper block h-full rounded-sm border-2 p-5 transition-shadow hover:shadow-[5px_5px_0_var(--coral)] motion-reduce:transition-none">
+              <span class="riso-title font-display text-4xl font-black" aria-hidden="true">{s.n}</span>
+              <h3 class="font-display mt-2 text-xl font-black group-hover:underline">{s.title}</h3>
               <p class="text-ink-soft mt-2 text-base">{s.body}</p>
             </a>
           </li>

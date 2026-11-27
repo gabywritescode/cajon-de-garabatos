@@ -32,28 +32,23 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // Self-hosted at build time by Astro's Fonts API; consumed in global.css.
+  // Brand fonts (Figma board): Merriweather for headings, Merriweather Sans
+  // for text. Self-hosted at build time by Astro's Fonts API.
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Bricolage Grotesque',
+      name: 'Merriweather',
       cssVariable: '--ff-display',
-      weights: ['400', '600', '800'],
-      subsets: ['latin'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Newsreader',
-      cssVariable: '--ff-body',
-      weights: ['400', '500'],
+      weights: ['400', '700', '900'],
       styles: ['normal', 'italic'],
       subsets: ['latin'],
     },
     {
       provider: fontProviders.google(),
-      name: 'Space Mono',
-      cssVariable: '--ff-mono',
+      name: 'Merriweather Sans',
+      cssVariable: '--ff-body',
       weights: ['400', '700'],
+      styles: ['normal', 'italic'],
       subsets: ['latin'],
     },
   ],

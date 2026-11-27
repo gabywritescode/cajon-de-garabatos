@@ -1,0 +1,27 @@
+---
+// One of the hand-drawn garabatos from the Figma brand board, inlined so it
+// takes the current text colour (set a text-* class to recolour it).
+// Add new ones by exporting an SVG from Figma into src/assets/scribbles/
+// with its fill set to currentColor.
+const files = import.meta.glob<string>('../assets/scribbles/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+export type ScribbleName = 'arrow' | 'circle' | 'lightbulb' | 'pencil' | 'squiggles' | 'star';
+
+interface Props {
+  name: ScribbleName;
+  class?: string;
+  /** Stretch to fill the box (e.g. a circle around a phrase) instead of keeping proportions. */
+  stretch?: boolean;
+}
+
+const { name, class: className, stretch = false } = Astro.props;
+let svg = files[`../assets/scribbles/${name}.svg`];
+if (!svg) throw new Error(`Unknown scribble: ${name}`);
+if (stretch) svg = svg.replace('<svg ', '<svg preserveAspectRatio="none" ');
+---
+
+<span class:list={['scribble pointer-events-none block', className]} aria-hidden="true" set:html={svg} />

@@ -10,18 +10,21 @@ interface Props {
 const { page, lang } = Astro.props;
 const t = UI[lang];
 const other = otherLang(lang);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const links: { label: string; page: PageKey }[] = [
   { label: t.nav.workshops, page: 'workshops' },
   { label: t.nav.about, page: 'about' },
 ];
+const linkClass = 'font-mono text-[11px] font-bold tracking-wider whitespace-nowrap uppercase sm:text-xs';
 ---
 
-<header class="border-ink/15 bg-paper/90 sticky top-0 z-40 border-b backdrop-blur">
-  <div class="mx-auto flex max-w-4xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-    <a href={pageHref('home', lang)} class="font-display text-ink text-lg leading-none font-extrabold tracking-tight sm:text-xl">
-      <span class="hidden sm:inline">{SITE.name}</span>
-      <span class="sm:hidden">Cajón</span>
+<header class="border-ink/10 bg-paper/92 sticky top-0 z-40 border-b backdrop-blur">
+  <div class="mx-auto flex max-w-4xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
+    <a href={pageHref('home', lang)} class="shrink-0" aria-label={SITE.name}>
+      {/* Phones get just the scribble mark so the whole nav fits. */}
+      <img src={`${base}/favicon.svg`} alt={SITE.name} width="36" height="36" class="h-9 w-9 sm:hidden" />
+      <img src={`${base}/brand/logo.svg`} alt={SITE.name} width="410" height="133" class="hidden h-11 w-auto sm:block" />
     </a>
 
     <nav class="flex items-center gap-3 sm:gap-5" aria-label={lang === 'es' ? 'Principal' : 'Primary'}>
@@ -31,18 +34,17 @@ const links: { label: string; page: PageKey }[] = [
             href={pageHref(link.page, lang)}
             aria-current={page === link.page ? 'page' : undefined}
             class:list={[
-              'font-mono text-[11px] tracking-wide whitespace-nowrap uppercase sm:text-xs',
-              page === link.page ? 'text-blue underline decoration-pink decoration-2 underline-offset-4' : 'text-ink-soft hover:text-ink',
+              linkClass,
+              page === link.page
+                ? 'text-blue decoration-coral underline decoration-2 underline-offset-4'
+                : 'text-ink-soft hover:text-blue',
             ]}
           >
             {link.label}
           </a>
         ))
       }
-      <a
-        href={SITE.newsletterUrl}
-        class="text-ink-soft hover:text-ink font-mono text-[11px] tracking-wide whitespace-nowrap uppercase sm:text-xs"
-      >
+      <a href={SITE.newsletterUrl} class:list={[linkClass, 'text-ink-soft hover:text-blue']}>
         {t.nav.newsletter}<span aria-hidden="true"> ↗</span>
       </a>
       <a
@@ -50,7 +52,7 @@ const links: { label: string; page: PageKey }[] = [
         hreflang={other}
         lang={other}
         title={t.switchTitle}
-        class="border-ink text-ink hover:bg-yellow rounded-sm border px-1.5 py-0.5 font-mono text-[11px] font-bold sm:text-xs"
+        class="border-blue text-blue hover:bg-blue hover:text-paper rounded-full border-2 px-2 py-0.5 font-mono text-[11px] font-bold sm:text-xs"
       >
         {t.switchLabel}
       </a>
