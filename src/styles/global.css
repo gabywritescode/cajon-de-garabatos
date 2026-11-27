@@ -6,11 +6,10 @@
    way the Instagram stories use it: blue on white.
    - Near-black (--ink) for headings and text, flat (no 3D or offsets).
    - Blue (--blue) for the logo, links, labels and calls to action.
-   - Soft grey-blue (--mist) for the scribble accents: underlines and
-     circles behind key words, stars, squiggles, notebook rules.
-   Green, coral and the tertiary tones are kept as tokens for the odd
-   special case (e.g. scribbles on a coloured ground) but are not part
-   of the everyday look.
+   - Soft grey-blue (--mist) for underlines and circles behind key words,
+     the active nav underline and notebook rules.
+   - Green and coral (--green, --coral) for small illustrations only:
+     stars and squiggles. Never for text, buttons or headings.
 
    Contrast on --paper: --ink, --ink-soft and --blue pass WCAG AA for
    small text. --mist, --sky, --grey, --green and --coral are for
