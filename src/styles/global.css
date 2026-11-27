@@ -2,18 +2,19 @@
 @plugin '@tailwindcss/typography';
 
 /* ---------------------------------------------------------------------
-   Brand palette from the Figma board (MAIN VAINAS → COLORES).
-   Primary: blue, black, white. Secondary: green, coral, grey.
-   Tertiary (scribbles on blue/green/coral grounds): sky, pine, brick.
+   Brand palette from the Figma board (MAIN VAINAS → COLORES), used the
+   way the Instagram stories use it: blue on white.
+   - Near-black (--ink) for headings and text, flat (no 3D or offsets).
+   - Blue (--blue) for the logo, links, labels and calls to action.
+   - Soft grey-blue (--mist) for the scribble accents: underlines and
+     circles behind key words, stars, squiggles, notebook rules.
+   Green, coral and the tertiary tones are kept as tokens for the odd
+   special case (e.g. scribbles on a coloured ground) but are not part
+   of the everyday look.
 
-   Blue is the primary colour (headlines, buttons, links, labels).
-   Green and coral are the accents, used about equally: green for stars,
-   button shadows and the active nav underline; coral for the hand-drawn
-   circle, the headline offset and the notebook margin.
-
-   Contrast on --paper: --ink, --ink-soft, --blue, --pine and --brick
-   pass WCAG AA for small text. --green, --coral, --grey and --sky are
-   for shapes, large type and scribbles only (use --pine for green text).
+   Contrast on --paper: --ink, --ink-soft and --blue pass WCAG AA for
+   small text. --mist, --sky, --grey, --green and --coral are for
+   shapes and scribbles only.
    --------------------------------------------------------------------- */
 :root {
   color-scheme: light;
@@ -28,7 +29,7 @@
   --sky: #5783d9;
   --pine: #277757;
   --brick: #ae3631;
-  --rule: #c9d6ee; /* notebook lines */
+  --mist: #c1cbd3; /* grey-blue scribble accent */
 }
 
 @theme inline {
@@ -42,7 +43,7 @@
   --color-sky: var(--sky);
   --color-pine: var(--pine);
   --color-brick: var(--brick);
-  --color-rule: var(--rule);
+  --color-mist: var(--mist);
 
   --font-display: var(--ff-display);
   --font-body: var(--ff-body);
@@ -96,13 +97,7 @@
 }
 
 @layer components {
-  /* Headline in brand blue with a coral pass slightly out of register. */
-  .riso-title {
-    color: var(--blue);
-    text-shadow: 0.04em 0.035em 0 color-mix(in srgb, var(--coral) 70%, transparent);
-  }
-
-  /* Ruled notebook paper with a coral margin line. Text inside sits on the
+  /* Ruled notebook paper with a blue margin line. Text inside sits on the
      rules: everything uses a 1.6rem line height, and vertical padding and
      gaps are whole multiples of it (pt-[3.2rem], mt-[1.6rem], …). */
   .notebook {
@@ -110,8 +105,8 @@
     line-height: var(--line);
     background-color: #fbfbf9;
     background-image:
-      linear-gradient(90deg, transparent 2.1rem, color-mix(in srgb, var(--coral) 55%, transparent) 2.1rem 2.2rem, transparent 2.2rem),
-      repeating-linear-gradient(transparent 0 calc(var(--line) - 1px), var(--rule) calc(var(--line) - 1px) var(--line));
+      linear-gradient(90deg, transparent 2.1rem, color-mix(in srgb, var(--sky) 45%, transparent) 2.1rem 2.2rem, transparent 2.2rem),
+      repeating-linear-gradient(transparent 0 calc(var(--line) - 1px), color-mix(in srgb, var(--mist) 70%, transparent) calc(var(--line) - 1px) var(--line));
     background-position: 0 0, 0 0.3rem;
   }
   /* !important so text-sm / text-xl utilities can't knock text off the rules. */
@@ -121,7 +116,7 @@
 
   /* Hand-drawn underline swipe behind a phrase. */
   .marker {
-    background: linear-gradient(transparent 60%, color-mix(in srgb, var(--sky) 35%, transparent) 60% 92%, transparent 92%);
+    background: linear-gradient(transparent 60%, color-mix(in srgb, var(--mist) 80%, transparent) 60% 92%, transparent 92%);
     padding-inline: 0.1em;
   }
 
@@ -133,8 +128,8 @@
 
   /* Text Gaby still needs to write: obvious on the preview, easy to grep. */
   .todo {
-    background: color-mix(in srgb, var(--coral) 14%, transparent);
-    outline: 1px dashed var(--coral);
+    background: color-mix(in srgb, var(--mist) 40%, transparent);
+    outline: 1px dashed var(--blue);
     padding-inline: 0.2em;
   }
 }
@@ -144,9 +139,9 @@
   --tw-prose-headings: var(--ink);
   --tw-prose-links: var(--blue);
   --tw-prose-bold: var(--ink);
-  --tw-prose-bullets: var(--coral);
+  --tw-prose-bullets: var(--blue);
   --tw-prose-quotes: var(--ink);
-  --tw-prose-quote-borders: var(--coral);
+  --tw-prose-quote-borders: var(--mist);
 }
 .prose :where(h2, h3) {
   font-family: var(--font-display);

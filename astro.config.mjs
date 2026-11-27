@@ -39,7 +39,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Merriweather',
       cssVariable: '--ff-display',
-      weights: ['400', '700', '900'],
+      weights: ['400', '700'],
       styles: ['normal', 'italic'],
       subsets: ['latin'],
     },

@@ -20,7 +20,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const card = 'notebook relative pt-[3.2rem] pr-6 pb-[1.6rem] pl-12 shadow-[0_1px_2px_rgb(0_0_0/0.08),0_8px_24px_-12px_rgb(0_0_0/0.25)]';
 const label = 'font-mono text-xs font-bold tracking-[0.18em] uppercase';
-const title = 'font-display text-xl font-black';
+const title = 'font-display text-xl font-bold';
 ---
 
 <section aria-labelledby="board" class="relative mx-auto max-w-4xl px-4 sm:px-6">
@@ -28,7 +28,7 @@ const title = 'font-display text-xl font-black';
   <div class="grid gap-12 sm:grid-cols-2 sm:gap-10">
     <article class:list={[card, 'sm:-rotate-1']}>
       <img src={`${base}/brand/tape-brown.png`} alt="" width="360" height="146" loading="lazy" class="absolute -top-5 left-1/2 w-32 -translate-x-1/2 -rotate-3" />
-      <h3 class:list={[label, 'text-pine']}>{t.nextWorkshop}</h3>
+      <h3 class:list={[label, 'text-blue']}>{t.nextWorkshop}</h3>
       {
         workshop ? (
           <>
@@ -80,7 +80,7 @@ const title = 'font-display text-xl font-black';
           </p>
         )
       }
-      <Scribble name="star" class="text-coral absolute -right-3 -bottom-4 h-12 w-10 rotate-12" />
+      <Scribble name="star" class="text-mist absolute -right-3 -bottom-4 h-12 w-10 rotate-12" />
     </article>
   </div>
 </section>
